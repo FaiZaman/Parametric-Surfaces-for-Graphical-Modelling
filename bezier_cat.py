@@ -12,9 +12,9 @@ crv1.degree = 2
 # Set control points
 crv1.ctrlpts = [
     [10.0, 20.0],
-    [5.0, 10.0],
-    [35.0, 10.0],
-    [32.0, 26.0]
+    [7.5, 15.0],
+    [12.0, 6.0],
+    [20.0, 5.0]
 ]
 
 # Generate a uniform knot vector
@@ -28,10 +28,10 @@ crv2.degree = 3
 
 # Set control points
 crv2.ctrlpts = [
-    [20.0, 4.0],
-    [36.0, 5.0],
+    [20.0, 5.0],
+    [36.0, 6.0],
     [40.0, 17.0],
-    [32.0, 26.0]
+    [34.0, 24.0]
 ]
 
 # Generate a uniform knot vector
@@ -46,8 +46,8 @@ crv3.degree = 3
 # Set control points
 crv3.ctrlpts = [
     [34.0, 24.0],
-    [36.0, 34.0],
-    [26.0, 28.0],
+    [36.0, 35.0],
+    [28.0, 32.0],
     [26.0, 28.0]
 ]
 
@@ -80,7 +80,7 @@ crv5.degree = 3
 # Set control points
 crv5.ctrlpts = [
     [16.0, 27.0],
-    [7.0, 31.0],
+    [5.0, 31.0],
     [10.0, 20.0],
     [10.0, 20.0]
 ]
@@ -89,7 +89,7 @@ crv5.ctrlpts = [
 crv5.knotvector = knotvector.generate(crv5.degree, crv5.ctrlpts_size)
 
 # Create a curve container
-mcrv = multi.CurveContainer(crv1, crv2)# crv3, crv4, crv5)
+mcrv = multi.CurveContainer(crv1, crv2, crv3, crv4, crv5)
 
 # Set the visualization component of the curve container
 mcrv.vis = VisMPL.VisCurve2D()
