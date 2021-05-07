@@ -34,8 +34,10 @@ eyes.delta = 0.025
 eyes.evaluate()
 
 # add to container
-human_face = multi.SurfaceContainer(head, eyes)
+human_face = multi.SurfaceContainer(head)
 
 # render with colourmap
 human_face.vis = VisMPL.VisSurface()
-human_face.render(colormap=[cm.copper, cm.plasma])
+human_face.render(colormap=[cm.copper])
+
+# .samplesize - levels of detail
