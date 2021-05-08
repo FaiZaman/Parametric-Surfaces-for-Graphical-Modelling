@@ -32,6 +32,7 @@ curve.knotvector = utilities.generate_knot_vector(curve.degree, len(curve.ctrlpt
 # Set evaluation delta
 curve.delta = 0.01
 
+# initialise scale factor
 scale_factor = 1
 
 while True:
