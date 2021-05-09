@@ -3,41 +3,63 @@ from matplotlib import cm
 from geomdl import NURBS
 from geomdl import BSpline
 from geomdl import multi
+from geomdl import utilities
 from geomdl import exchange
 from geomdl.visualization import VisMPL
 
-# import the control point data
-head = exchange.import_json("data/head.json")
+# set face control points
+left_face = NURBS.Surface()
 
-# set head parameters
-head[0].sample_size = 100
-head[0].delta = 0.05
+left_face.degree_u = 2
+left_face.degree_v = 2
+left_face.delta = 0.05
 
-# set eye control points
-eye_ctrlpts = [
-    [[6000, -2000, 1000], [6000, -1750, 1250], [6000, -1500, 1500]],
-    [[6000, -1250, 1250], [6000, -1000, 1000], [6000, -1250, 750]],
-    [[6000, -1500, 500], [6000, -1750, 750], [6000, -2000, 1000]]
-]
+ctrl_pts = exchange.import_txt("data/left_face.cpt", separator=",")
 
-eyes = BSpline.Surface()
-eyes.degree_u = 2
-eyes.degree_v = 2
-eyes.ctrlpts2d = eye_ctrlpts
+left_face.ctrlpts_size_u = 3
+left_face.ctrlpts_size_v = 4
+left_face.ctrlpts = ctrl_pts
 
-# number of knots in u = number of rows of control points + degree of u + 1
-# number of knots in u = number of columns of control points + degree of v + 1
-eyes.knotvector_u = [0, 0, 0, 1, 1, 2]
-eyes.knotvector_v = [0, 0, 0, 1, 1, 2]
+left_face.knotvector_u = utilities.generate_knot_vector(left_face.degree_u, 3)
+left_face.knotvector_v = utilities.generate_knot_vector(left_face.degree_v, 4)
 
-eyes.delta = 0.025
-eyes.evaluate()
+# set face control points
+right_face = NURBS.Surface()
+
+right_face.degree_u = 2
+right_face.degree_v = 2
+right_face.delta = 0.05
+
+ctrl_pts = exchange.import_txt("data/right_face.cpt", separator=",")
+
+right_face.ctrlpts_size_u = 3
+right_face.ctrlpts_size_v = 4
+right_face.ctrlpts = ctrl_pts
+
+right_face.knotvector_u = utilities.generate_knot_vector(right_face.degree_u, 3)
+right_face.knotvector_v = utilities.generate_knot_vector(right_face.degree_v, 4)
+
+# set face control points
+left_eye = NURBS.Surface()
+
+left_eye.degree_u = 1
+left_eye.degree_v = 1
+left_eye.delta = 0.05
+
+ctrl_pts = exchange.import_txt("data/left_eye.cpt", separator=",")
+
+left_eye.ctrlpts_size_u = 2
+left_eye.ctrlpts_size_v = 3
+left_eye.ctrlpts = ctrl_pts
+
+left_eye.knotvector_u = utilities.generate_knot_vector(left_eye.degree_u, 2)
+left_eye.knotvector_v = utilities.generate_knot_vector(left_eye.degree_v, 3)
 
 # add to container
-human_face = multi.SurfaceContainer(head)
+human_face = multi.SurfaceContainer(left_face, right_face, left_eye)
 
 # render with colourmap
 human_face.vis = VisMPL.VisSurface()
-human_face.render(colormap=[cm.copper])
+human_face.render(colormap=[cm.copper, cm.copper, cm.plasma])
 
 # .samplesize - levels of detail
