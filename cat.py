@@ -37,7 +37,7 @@ scale_factor = 1
 
 while True:
 
-    print("Enter a factor by which to scale the curve, or enter e to exit:")
+    print("Enter an integer factor by which to scale the curve, or enter e to exit:")
     scale_factor = input(">> ")
 
     if scale_factor in ('E', 'e'):

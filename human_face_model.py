@@ -41,7 +41,7 @@ face.knotvector_u = utilities.generate_knot_vector(face.degree_u, 24)
 face.knotvector_v = utilities.generate_knot_vector(face.degree_v, 15)
 
 # render face with colourmap
-face.vis = VisVTK.VisSurface(ctrlpts=False, axes=False)
+face.vis = VisVTK.VisSurface()
 face.render(cpcolor='wheat')
 
 # .samplesize - levels of detail
